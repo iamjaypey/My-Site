@@ -10,33 +10,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body style="background-color:#F0F2F5;">
-    <!-- header section-->
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-          <div class="container-fluid">
-            <a class="navbar-brand" href="/">
-              <i class="fa-solid fa-square-rss"></i>My Blog</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse d-lg-flex justify-content-end" id="navbarNav">
-              <ul class="navbar-nav">
-                <li class="nav-item">
-                  <a class="nav-link fs-6 text-white" href="#.">
-                    <i class="fa-solid fa-pen-to-square px-2"></i>
-                    New post
-                  </a>    
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link text-white" href="#.">
-                    <i class="fa-solid fa-arrow-right-to-bracket px-2"></i>
-                    Login</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-         </nav>
-    </header>
+
+    <%- include("./navbar") -%>
+
     <section class="container bg-white my-4" style="height:950px; width:70%">
         <div class="container">
             <h1 class="py-3 text-center">
@@ -115,11 +91,7 @@
    
 
     <i class="fa-solid fa-circle-trash"></i>
-    <!-- creation of footer -->
-  <div class="card mt-3" style="background-color:#001529" >
-    <div class="card-body text-center">
-      <p style="color:white;"> © MyBlog 2022 by jaypee </p>
-    </div>
-  </div>
+   <!-- footer inclution -->
+  <%- include("./footer") -%>
 </body>
 </html>

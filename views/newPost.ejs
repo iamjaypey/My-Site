@@ -10,55 +10,34 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-          <div class="container-fluid">
-            <a class="navbar-brand" href="/">
-              <i class="fa-solid fa-square-rss"></i>My Blog</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse d-lg-flex justify-content-end" id="navbarNav">
-              <ul class="navbar-nav">
-                <li class="nav-item">
-                  <a class="nav-link fs-6 text-white" href="#.">
-                    <i class="fa-solid fa-pen-to-square px-2"></i>
-                    New post
-                  </a>    
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link text-white" href="#.">
-                    <i class="fa-solid fa-arrow-right-to-bracket px-2"></i>
-                    Login!</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </nav>
-</header>
+  <!-- including the nav bar dropdown -->
+  <%- include("./navbar") -%>
+
+  <%- include("./messages") -%>
+
    <div class="card mx-auto mt-4 shadow-lg p-3 mb-5 bg-body rounded" style="width:50%; background-color:#F0F2F5; height:80%; border:1px solid #ccc;">
-        <form class="mx-auto mt-3" style="width:90%;">
+        <form method="post" action="/new-post" class="mx-auto mt-3" style="width:90%;" enctype="multipart/form-data">
             <h4 class="">Create a new post</h4>
             <div class="mb-4 mt-4">
               <label for="exampleInputEmail1" class="form-label mb-2">Title</label>
-              <input type="text" class="form-control rounded-pill p-2 " id="exampleInputEmail1" aria-describedby="emailHelp">
+              <input name="title" type="text" class="form-control rounded-pill p-2 " id="exampleInputEmail1" aria-describedby="emailHelp" required>
               <div id="emailHelp" class="form-text"></div>
             </div>
               <div class="mb-4">
                 <label for="exampleInputPassword1" class="form-label mb-2">Content</label>
-                <textarea class="form-control" id="floatingTextarea2" style="height:120px"></textarea>
+                <textarea class="form-control" name="content" id="floatingTextarea2" style="height:120px" required></textarea>
               </div>
               <div class="mb-4">
-                <label for="exampleInputPassword1" class="form-label mb-2">Upload file</label>
-                <input type="file" class="form-control rounded-pill p-2" id="exampleInputPassword1">
+                <label for="exampleInputPassword1" class="form-label mb-2">Media file</label>
+                <input type="file" name="mediaFile" accept=".png,.jpg,.jpeg,.mp4," class="form-control rounded-pill p-2" id="exampleInputPassword1" required>
               </div>
-              <a class="btn btn-primary" href="#" role="button">Create post</a>
-              <button class="btn btn-outline-secondary" type="submit">Back</button>
+              <div class="mb-4">
+                <button type="submit" name="" class="btn btn-primary btn-lg rounded-4">Create Post</button>
+                <button type="submit" name="" class="btn btn-outline-secondary text-dark bg-light btn-lg rounded-4"><a style="text-decoration:none; color:black;" href="./">Back</button>
+              </div>
         </form>
   </div>
-  <div class="card" style="background-color:#001529;" >
-    <div class="card-body text-center">
-      <p style="color:white;"> © MyBlog 2022 by jaypee </p>
-    </div>
+  <!-- footer inclution -->
+  <%- include("./footer") -%>
 </body>
 </html>

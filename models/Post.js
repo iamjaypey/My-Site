@@ -2,18 +2,19 @@ const mongoose = require('mongoose')
 const {Schema} = mongoose;
 const postSchema = new Schema({
     title: {
-        type: string
+        type: String
     },
     content: {
-        type: string
+        type: String
     },
    
-    file: {
-        type: string
+    mediaType: {
+        type: String
+    },
+    mediaFile: {
+        type: String
     }
-});
-    
-// {timestamps: true});
+},{timestamps: true}); 
 
 const Post = mongoose.model('Post', postSchema);
 

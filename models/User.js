@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const {Schema} = mongoose;
 const userSchema = new Schema({
-    userName: {
+    username: {
         type: String
     },
     password: {
@@ -15,9 +15,8 @@ const userSchema = new Schema({
     },
     image: {
         type: String
-    }},
-    
-{timestamps: true});
+    }
+}, {timestamps: true});
 
 const User = mongoose.model('User', userSchema);
 
