@@ -120,100 +120,9 @@ app.use(express.urlencoded({extended: true}))
 
 
 // creation of route for home
-app.get('/', (req,res) => {
+app.get('/', async (req,res) => {
 
-    const allPosts = [
-        {
-            img: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470',
-            title: 'Card title',
-            content: "Some quick example text to build on the card title and make up the bulk of the card's content."
-        },
-
-        {
-            img: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470',
-            title: 'Second Post',
-            content: "Some quick example text to build on the card title and make up the bulk of the card's content."
-        },
-
-        {
-            img: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470',
-            title: 'third post',
-            content: "Some quick example text to build on the card title and make up the bulk of the card's content."
-        },
-
-        {
-            img: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470',
-            title: 'Card title',
-            content: "Some quick example text to build on the card title and make up the bulk of the card's content."
-        },
-
-        {
-            img: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470',
-            title: 'Card title',
-            content: "Some quick example text to build on the card title and make up the bulk of the card's content."
-        },
-
-        {
-            img: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470',
-            title: 'Card title',
-            content: "Some quick example text to build on the card title and make up the bulk of the card's content."
-        },
-
-        {
-            img: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470',
-            title: 'Card title',
-            content: "Some quick example text to build on the card title and make up the bulk of the card's content."
-        },
-
-        {
-            img: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470',
-            title: 'Card title',
-            content: "Some quick example text to build on the card title and make up the bulk of the card's content."
-        },
-
-        {
-            img: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470',
-            title: 'Card title',
-            content: "Some quick example text to build on the card title and make up the bulk of the card's content."
-        },
-
-        {
-            img: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470',
-            title: 'Card title',
-            content: "Some quick example text to build on the card title and make up the bulk of the card's content."
-        },
-
-        {
-            img: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470',
-            title: 'Card title',
-            content: "Some quick example text to build on the card title and make up the bulk of the card's content."
-        },
-
-        {
-            img: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470',
-            title: 'Card title',
-            content: "Some quick example text to build on the card title and make up the bulk of the card's content."
-        },
-
-        {
-            img: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470',
-            title: 'Card title',
-            content: "Some quick example text to build on the card title and make up the bulk of the card's content."
-        },
-
-        {
-            img: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470',
-            title: 'Card title',
-            content: "Some quick example text to build on the card title and make up the bulk of the card's content."
-        },
-
-        {
-            img: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470',
-            title: 'Card title',
-            content: "Some quick example text to build on the card title and make up the bulk of the card's content."
-        },
-    ];
-
+    const allPosts = await post.find({});
     res.render('home', {allPosts});
 });
 
@@ -240,11 +149,13 @@ app.post('/new-post', isLoggedIn, upload.single('mediaFile'), async (req,res) =>
     let {title, content} = req.body;
     let mediaType = '';
     if (req.file.mimetype === 'video/mp4') {
-        mediaType = 'video';}else{
+        mediaType = 'video';
+    }else{
             mediaType = 'image';
         }
 
-  const uploadedFile = await cloudinary.uploader.upload(req.file.path);
+  const uploadedFile = await cloudinary.uploader.upload(req.file.path, { resource_type: mediaType});
+
   if(!uploadedFile) {
     req.flash('error-message','Error while uploading file!!');
 
