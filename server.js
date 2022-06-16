@@ -2,7 +2,7 @@ const express = require("express");
 
 const app = express();
 
-const port = 7000;
+const port = process.env.PORT || 7000;
 const logger = require('morgan');
 const path = require('path');
 const flash = require('connect-flash');
@@ -20,6 +20,7 @@ const localstrategy = require('passport-local');
 const {isLoggedIn} = require('./config/authorization');
 const multer  = require('multer');
 const cloudinary = require('cloudinary').v2;
+const moment = require('moment');
 
 
 const storage = multer.diskStorage({
@@ -39,7 +40,7 @@ cloudinary.config({
 
 
 // DB connection
-mongoose.connect("mongodb://localhost/MyDatabase")
+mongoose.connect("mongodb+srv://iamjaypee:Jesuloluwa1@jaypeeblog.u6xq9cb.mongodb.net/?retryWrites=true&w=majority")
 .then(response => console.log('Database connection successful'))
 .catch(error => console.log(`Database connection error: ${error}`))
 
@@ -57,7 +58,7 @@ app.use(session({
         maxAge: Date.now() + 3600000
     },
     store: MongoStore.create({
-      mongoUrl: 'mongodb://localhost/MyDatabase',
+      mongoUrl: 'mongodb+srv://iamjaypee:Jesuloluwa1@jaypeeblog.u6xq9cb.mongodb.net/?retryWrites=true&w=majority',
       ttl: 14 * 24 * 60 * 60 // = 14 days. Default
     })
   }));
@@ -109,6 +110,9 @@ app.use(logger('dev'));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+// moment setup
+app.locals.moment = moment;
+
 app.use(express.static(path.join(__dirname, 'views', )))
 
 // Static files directory setup
@@ -122,7 +126,7 @@ app.use(express.urlencoded({extended: true}))
 // creation of route for home
 app.get('/', async (req,res) => {
 
-    const allPosts = await post.find({});
+    const allPosts = await post.find({}).sort({_id: -1});
     res.render('home', {allPosts});
 });
 
@@ -166,7 +170,8 @@ app.post('/new-post', isLoggedIn, upload.single('mediaFile'), async (req,res) =>
     title,
     content,
     mediaType,
-    mediaFile: uploadedFile.secure_url
+    mediaFile: uploadedFile.secure_url,
+    author: req.user._id
   });
   await newPost.save();
   
@@ -175,9 +180,12 @@ app.post('/new-post', isLoggedIn, upload.single('mediaFile'), async (req,res) =>
 });
 
 // creation of route for viewpost1
-app.get('/viewPost1', (req,res) => {
-    res.render('viewPost1');
-})
+// creation of route for viewpost
+app.get('/viewPost1/:postId', async (req,res) => {
+    let singlepost = await post.findOne ({ _id: req.params.postId}).populate("author");
+    console.log(singlepost)
+    res.render('viewpost1', { singlepost }) ;
+});
 
 // creation of route for register
 app.get('/register', (req,res) => {
@@ -223,10 +231,6 @@ app.post('/user/register', async (req, res)=> {
 
 });
 
-// creation of route for viewpost
-app.get('/viewpost1', (req,res) => {
-    res.render('viewpost1');
-})
 
 app.get('/user/logout',(req,res) => {
     req.logout(function(err) {

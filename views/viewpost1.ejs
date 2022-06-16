@@ -16,18 +16,29 @@
     <section class="container bg-white my-4" style="height:950px; width:70%">
         <div class="container">
             <h1 class="py-3 text-center">
-                The heading of our post
-            </h1>
+                <%= singlepost.title %>
+            </h1> 
             <div class="d-flex justify-content-between">
                 <div class="d-flex"><i class="fa-solid fa-circle-user fs-3 text-secondary"></i>
-                    <p class="mx-2">Makanjuola</p>
+                    <p class="mx-2"><%= singlepost.author.username %></p>
                 </div>
-                <div>19 May, 2022</div>
+                <div><%= moment(singlepost.createdAt).format('ll') %></div>
             </div>
-            <img width="100%" height="500px" src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470" alt="Post Image">
+
+            <% if (singlepost.mediaType === 'image') { %>
+                <img style="max-height:300px" src="<%= singlepost.mediaFile %>" class="card-img-top" alt="IMG">
+              <% } else { %>
+                <video width="100" height="auto" style="max-height:300px" controls>
+                  <source src="<%= singlepost.mediaFile %>" type="video/mp4">
+                  <source src="<%= singlepost.mediaFile %>" type="video/ogg">
+                  Your browser does not support the video tag.
+                </video>
+
+                <% } %>
+
             <div class="my-2">
                 <p>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. In accusamus pariatur modi, facilis ad quo. Quas possimus hic adipisci a ratione cumque. Rerum, incidunt ducimus saepe numquam blanditiis laudantium quam.
+                <%= singlepost.content %>
                 </p>
             </div>
             <div style="border-top:1px solid #E8E9Ec;">
@@ -39,31 +50,31 @@
                 </div>
                 <div class="d-flex justify-content-end">
                     <button type="submit" class="btn btn-outline-secondary text-dark mx-2">clear</button>
-                    <button type="clear" class="btn btn-primary">Submit</button>
+                    <button type="clear" class="btn btn-success btn-sm">Comment</button>
                 </div>
             </form>
               <!-- comment section -->
                 <div>
                     <p>1 comment</p>
                 </div>
-            <div class="card my-2 border-0" style="background-color:#f5f5f5;">
+            <div class="card my-2 border-0" style="background-color:#f5f5f5;padding:8px 8px 0px 8px;">
                <div class="d-flex justify-content-between">
                     <!-- left section -->
                     <div class="d-flex">
-                    <i class="fa-solid fa-circle-user fs-2 mx-2 mt-2 text-secondary"></i>
-                    <div>
-                        <p class="m-0 mx-3 fw-bold">jaypee</p>
-                        <p class="m-0 mx-3">Nice Post</p>
-                    </div>
-
-                </div>
-                <!-- right section -->
-                <div>
-                    <p class="text-secondary">30 seconds ago</p>
+                        <i class="fa-solid fa-circle-user fs-2 mx-2 mt-2 text-secondary"></i>
+                         <div>
+                         <p class="m-2 mx-2 fw-bold">jaypee</p>
+                         </div>
+                   </div>
+                    <!-- right section -->
+                 <div>
+                    <p class="text-secondary"><%= moment(singlepost.createdAt).fromNow()%></p>
                     <i class="fa-solid fa-square-pen mx-3"></i>
                     <i class="fa-solid fa-trash-can text-danger"></i>
-                </div>
+                 </div>
                </div>
+               <p class="m-0 mx-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum omnis ipsam totam, eum autem voluptatibus eligendi quibusdam nostrum odit. Obcaecati blanditiis delectus voluptas illum repudiandae dignissimos eum modi, laboriosam mollitia!</p>
+
             </div>
 
             <!-- second comment
