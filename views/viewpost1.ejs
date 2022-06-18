@@ -28,7 +28,7 @@
             <% if (singlepost.mediaType === 'image') { %>
                 <img style="max-height:300px" src="<%= singlepost.mediaFile %>" class="card-img-top" alt="IMG">
               <% } else { %>
-                <video width="100" height="auto" style="max-height:300px" controls>
+                <video width="100%" height="auto" style="max-height:300px" controls>
                   <source src="<%= singlepost.mediaFile %>" type="video/mp4">
                   <source src="<%= singlepost.mediaFile %>" type="video/ogg">
                   Your browser does not support the video tag.

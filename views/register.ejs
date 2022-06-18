@@ -16,45 +16,46 @@
     <!-- flash messages -->
     <%- include("./messages") -%>
 
-    <!-- main section start -->
-    <div class="card mx-auto mt-4 shadow-lg p-3 mb-5 bg-body rounded" style="width:50%; background-color:#F0F2F5; height:80%; border:1px solid #ccc; ">
-                <form method="post" action="/user/register"  class="mx-auto mt-3" style="width:90%;">
-                    <h3 class="text-center ">Sign up for free</h3>
-                    <div class="mb-4">
-                      <label for="exampleInputEmail1" class="form-label mb-2">User name</label>
-                      <input type="text" name="username" class="form-control rounded-pill p-2 " id="exampleInputEmail1" aria-describedby="emailHelp">
-                      <div id="emailHelp" class="form-text"></div>
-                    </div>
-
-                    <div class="mb-4">
-                      <label for="exampleInputPassword1" class="form-label mb-2">Password</label>
-                      <input type="password" name="password" class="form-control rounded-pill p-2" id="exampleInputPassword1">
-                    </div>
-                    <div class="mb-4">
-                        <label for="exampleInputPassword1" class="form-label mb-2">Confirm Password</label>
-                        <input type="password" name="confirmPassword" class="form-control rounded-pill p-2" id="exampleInputPassword1">
-                      </div>
-                      <div class="mb-4">
-                        <label for="exampleInputPassword1" class="form-label mb-2">Email</label>
-                        <input type="email" name="email" class="form-control rounded-pill p-2" id="exampleInputPassword1">
-                      </div>
-                      <div class="mb-4">
-                        <label for="exampleInputPassword1" class="form-label mb-2">Summary</label>
-                        <input type="text" name="summary" class="form-control rounded-pill p-2" id="exampleInputPassword1">
-                      </div>
-                      <div class="mb-4">
-                        <label for="exampleInputPassword1" class="form-label mb-2">Image Url</label>
-                        <input type="file" name="image" class="form-control rounded-pill p-2" id="exampleInputPassword1">
-                      </div>
-                    <div class="d-grid">
-                     <button type="submit" class="btn btn-primary btn-lg">Sign up</button></div>
-                </form>
-                <p class="text-center my-3 text-primary">Already have an account?
-                    <span><a href="/login">Login</a></span>
-                </p>
-        </div> 
-    </div>
     
+    <!-- main section start --> 
+    <div class="card mx-auto shadow-lg mt-5 p-3 mb-5 bg-body rounded col-lg-6" style="width:80%;; background-color:#F0F2F5; height:80%; border:1px solid #ccc; ">
+              <form method="post" action="/user/register"  class="mx-auto mt-3" style="width:80%;">
+                  <h3 class="text-center ">Sign up for free</h3>
+                  <div class="mb-4">
+                    <label for="exampleInputEmail1" class="form-label mb-2">User name</label>
+                    <input type="text" name="username" class="form-control rounded-pill p-2 " id="exampleInputEmail1" aria-describedby="emailHelp">
+                    <div id="emailHelp" class="form-text"></div>
+                  </div>
+
+                  <div class="mb-4">
+                    <label for="exampleInputPassword1" class="form-label mb-2">Password</label>
+                    <input type="password" name="password" class="form-control rounded-pill p-2" id="exampleInputPassword1">
+                  </div>
+                  <div class="mb-4">
+                      <label for="exampleInputPassword1" class="form-label mb-2">Confirm Password</label>
+                      <input type="password" name="confirmPassword" class="form-control rounded-pill p-2" id="exampleInputPassword1">
+                    </div>
+                    <div class="mb-4">
+                      <label for="exampleInputPassword1" class="form-label mb-2">Email</label>
+                      <input type="email" name="email" class="form-control rounded-pill p-2" id="exampleInputPassword1">
+                    </div>
+                    <div class="mb-4">
+                      <label for="exampleInputPassword1" class="form-label mb-2">Summary</label>
+                      <input type="text" name="summary" class="form-control rounded-pill p-2" id="exampleInputPassword1">
+                    </div>
+                    <div class="mb-4">
+                      <label for="exampleInputPassword1" class="form-label mb-2">Image Url</label>
+                      <input type="file" name="image" class="form-control rounded-pill p-2" id="exampleInputPassword1">
+                    </div>
+                  <div class="d-grid">
+                   <button type="submit" class="btn btn-primary btn-lg">Sign up</button></div>
+              </form>
+              <p class="text-center my-3 text-primary">Already have an account?
+                  <span><a href="/login">Login</a></span>
+              </p>
+      </div> 
+  </div> 
+  
   <!-- footer inclution -->
   <%- include("./footer") -%>
 </body>
