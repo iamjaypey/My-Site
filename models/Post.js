@@ -17,10 +17,15 @@ const postSchema = new Schema({
     author: {
         type: Schema.Types.ObjectId,
         ref: "User"
-    }
+    },
+    comments : [{
+        type: Schema.Types.ObjectId,
+        ref: 'comment',
+    }]
+
 },{timestamps: true}); 
 
-const Post = mongoose.model('Post', postSchema);
+const Post = mongoose.model('post', postSchema);
 
 // Exporting
 module.exports = Post;

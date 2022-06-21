@@ -7,20 +7,22 @@ const logger = require('morgan');
 const path = require('path');
 const flash = require('connect-flash');
 const mongoose = require('mongoose');
-const { response } = require("express");
+// const { response } = require("express");
 const User = require ('./models/User.js');
-const post = require('./models/Post.js');
+const Post = require('./models/Post.js');
+const Comment = require('./models/comment');
 const bcrypt = require('bcryptjs')
 const cookieParser = require('cookie-parser')
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
-const {globalVariables} = require('./config/globalConfig');
+const {globalVariables} = require('./config/globalConfig');           
 const passport = require('passport');
 const localstrategy = require('passport-local');
 const {isLoggedIn} = require('./config/authorization');
 const multer  = require('multer');
 const cloudinary = require('cloudinary').v2;
 const moment = require('moment');
+const { json } = require("express");
 
 
 const storage = multer.diskStorage({
@@ -126,7 +128,7 @@ app.use(express.urlencoded({extended: true}))
 // creation of route for home
 app.get('/', async (req,res) => {
 
-    const allPosts = await post.find({}).sort({_id: -1});
+    const allPosts = await Post.find({}).sort({_id: -1});
     res.render('home', {allPosts});
 });
 
@@ -147,7 +149,7 @@ app.get('/new-post', (req,res) => {
     res.render('newPost');
 })
 
-let newPost = new post();
+let newPost = new Post();
 
 app.post('/new-post', isLoggedIn, upload.single('mediaFile'), async (req,res) => {
     let {title, content} = req.body;
@@ -166,7 +168,7 @@ app.post('/new-post', isLoggedIn, upload.single('mediaFile'), async (req,res) =>
    return res.redirect('back') 
 //    now head over to model folder and add mediaType
   }
-  let newPost = new post({
+  let newPost = new Post({
     title,
     content,
     mediaType,
@@ -182,10 +184,40 @@ app.post('/new-post', isLoggedIn, upload.single('mediaFile'), async (req,res) =>
 // creation of route for viewpost1
 // creation of route for viewpost
 app.get('/viewPost1/:postId', async (req,res) => {
-    let singlepost = await post.findOne ({ _id: req.params.postId}).populate("author");
-    console.log(singlepost)
-    res.render('viewpost1', { singlepost }) ;
+    let singlePost = await Post.findOne ({ _id: req.params.postId}).populate("author").sort({'created_at': -1})
+    .populate({
+        path: "comments",
+        options: { sort: { _id: -1 },
+        populate: {
+            path: 'user'
+        } }
+    });
+
+    console.log(singlePost.comments)
+    res.render('viewpost1', { singlePost }) ;
+    
 });
+
+
+// creation of route for comment
+app.post('/comment/:postId', async (req,res) => {
+    
+    let { comment } = req.body;
+    let post = await Post.findOne({ _id: req.params.postId });
+
+    let newComment = new Comment ({
+        comment : comment,
+        user: req.user._id,
+    });
+
+    await newComment.save();
+
+    post.comments.push(newComment._id);
+    await post.save();
+    
+    req.flash("success-message", "comment created successfully");
+    res.redirect("back");
+    });
 
 // creation of route for register
 app.get('/register', (req,res) => {
@@ -230,6 +262,7 @@ app.post('/user/register', async (req, res)=> {
     return res.redirect ("/")
 
 });
+
 
 
 app.get('/user/logout',(req,res) => {
